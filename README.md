@@ -1,17 +1,11 @@
-# user-service
-User Management Service
-
-✅ Purpose: Manages user login, registration, and permissions.
-✅ Tech Stack: Keycloak, OAuth2, OpenID Connect, JWT, Firebase Auth, AWS Cognito.
-- Role base login, registration
+✅ Purpose: Manages user profiles, roles, and access control.
+✅ Tech Stack: Node.js (NestJS/Express), Python (FastAPI), MongoDB, PostgreSQL.
 ✅ Endpoints:
 
-/register
+/users/create
 
-/login
+/users/update/{id}
 
-/logout
+/users/delete/{id}
 
-/refresh-token
-
-/verify-email
+/users/list
