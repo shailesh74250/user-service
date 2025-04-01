@@ -1,14 +1,107 @@
 ✅ Purpose: Manages user profiles, roles, and access control.
 ✅ Tech Stack: Node.js (NestJS/Express), Python (FastAPI), MongoDB, PostgreSQL.
 ✅ Endpoints:
+- Create user POST /api/v1/users 
+- Get all user Get /api/v1/users
+- Get single user Get /api/v1/users/{id}
+- Update user PATCH /api/v1/users/{id}
+- Delete user DELETE /api/v1/users/{id}
 
-/users/create
+## Deploy
+- Docker file
+- Docker compose file
+- Terraform infrastructure deployment
+- CI/CD with github actions
+- Deployment based on environment 
+  - Dev, Stage, Prod
+- Deploy with 
+- Enable Auto-Scaling (Deploy on Kubernetes / AWS ECS)
+- Write script for generate infra and deploy app on infra
 
-/users/update/{id}
+## Security
+- XXR Attach
+- Authorize
+- API key
+- Helmet
+- CORS
+- CSRF Protection
+- Rate limiting
+- Encryption and Hashing
+- Env setup according to environment 
+- Implement Rate Limiting (Prevent brute-force attacks)
+- Encrypt Sensitive Data (e.g., phone, email)
+- Secure API Endpoints (e.g., Role-based access control)
 
-/users/delete/{id}
+## API documentation OpenAPI
 
-/users/list
+## Integrate Sonar Check
+
+## Integrate Husky
+
+## Code of Conduct
+
+## Documenation up-to-date with ReadMe file
+
+## TS-Config up-to-date
+
+## Unit and End-to-End test cases with Test Coverage
+
+## Linting & Formatting tool
+
+## Debug script in package.json file
+
+## Migration script
+
+## Properly Configure and config file value take from Env
+
+## Maintain API versioning
+
+## REST API & Envent driven architecture
+
+## Verify email or phone number 
+
+## Handle cache layer using Redis container
+
+## Database Indexing on Cloumn email, username
+
+## Database should be PostgreSQL with TypeORM
+
+## Connect PG admin for visualization of data
+
+## Proper DTO and Validation should be implemented
+
+## Audit Logging 
+- Track login attempts, password changes, profile updates
+- Table data audit
+
+## Session management
+
+
+## Pagination 
+
+## Search query
+
+## Handle Proper Role of user
+
+## Password should be stored as hash
+- Hash & Salt Passwords (e.g., bcrypt, Argon2)
+## Maintain status of user verified or not
+
+## Logging with winston
+
+## Monitoring 
+
+## Integration with Other services
+- Auth service
+- Validate authentication via Auth Microservice
+- Fetch user roles/permissions from Auth Service if needed
+
+## Event-Driven Communication (Kafka, RabbitMQ)
+- Publish user events (USER_CREATED, USER_UPDATED)
+- Listen to auth events (USER_VERIFIED, PASSWORD_RESET)
+
+## Implement command for generate Seed (test data)
+
 
 
 
