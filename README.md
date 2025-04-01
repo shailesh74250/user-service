@@ -102,6 +102,8 @@
 
 ## Implement command for generate Seed (test data)
 
+## Exception Handling
+
 
 
 
