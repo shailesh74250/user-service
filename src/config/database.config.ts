@@ -9,7 +9,7 @@ export default registerAs('database', () => ({
   password: process.env.DB_PASSWORD || 'postgres',
   database: process.env.DB_DATABASE || 'user_db',
   autoLoadEntities: true,
-  migrations: [__dirname + '/../../../migrations/*.ts'], // Add migration support
+  migrations: [__dirname + (process.env.NODE_ENV === 'production' ? '/../migrations/*.js' : '/../migrations/*.ts')], // Add migration support
   entities: [__dirname + (process.env.NODE_ENV === 'production' ? '/../**/*.entity.js' : '/../**/*.entity.ts')],
   synchronize: process.env.NODE_ENV === 'development',
   logging: process.env.NODE_ENV === 'development',

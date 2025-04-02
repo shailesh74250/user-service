@@ -19,7 +19,14 @@
     "test:watch": "NODE_ENV=testing jest --watch",
     "test:cov": "NODE_ENV=testing jest --coverage",
     "test:debug": "NODE_ENV=testing node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "NODE_ENV=testing jest --config ./test/jest-e2e.json"
+    "test:e2e": "NODE_ENV=testing jest --config ./test/jest-e2e.json",
+    "typeorm": "env-cmd ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration:generate": "npm run typeorm -- --dataSource=src/database/typeorm.factory.ts migration:generate",
+    "postmigration:generate": "npm run lint -- --fix",
+    "migration:create": "npm run typeorm -- migration:create",
+    "migration:run": "npm run typeorm -- --dataSource=src/database/typeorm.factory.ts migration:run",
+    "migration:revert": "npm run typeorm -- --dataSource=src/database/typeorm.factory.ts migration:revert"
+
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -29,6 +36,8 @@
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/swagger": "^11.1.0",
     "@nestjs/typeorm": "^11.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "pg": "^8.14.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",

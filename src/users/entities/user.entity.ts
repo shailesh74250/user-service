@@ -1,17 +1,53 @@
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  Index,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  JoinColumn,
+  OneToOne,
+} from 'typeorm';
 
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-
-@Entity()
+@Entity({
+  name: 'user',
+})
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  firstName: string;
+  // For "string | null" we need to use String type.
+  // More info: https://github.com/typeorm/typeorm/issues/2567
+  @Column({ type: String, unique: true, nullable: true })
+  email: string | null;
 
-  @Column()
-  lastName: string;
+  @Column({ nullable: true })
+  password?: string;
 
-  @Column({ default: true })
-  isActive: boolean;
+  @Index()
+  @Column({ type: String, nullable: true })
+  firstName: string | null;
+
+  @Index()
+  @Column({ type: String, nullable: true })
+  lastName: string | null;
+
+  @Column({ type: String, nullable: true })
+  photo?: string | null;
+
+  @Column({ type: String, nullable: true })
+  role?: string | null;
+
+  status?: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }
