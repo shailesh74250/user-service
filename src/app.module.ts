@@ -5,13 +5,14 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import databaseConfig from './config/database.config';
+import { swaggerConfig } from './config/swagger.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
-      load: [databaseConfig],
+      load: [databaseConfig, swaggerConfig],
       cache: true,
     }),
     UsersModule,
