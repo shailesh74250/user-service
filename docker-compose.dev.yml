@@ -1,0 +1,56 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: users-service-dev
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - db
+    volumes:
+      - user-service-dev:/var/lib/user-service-dev
+    networks:
+      - bridge
+
+  db:
+    image: postgres:17.4-alpine
+    container_name: user-service-pg-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - user-service-db:/var/lib/postgresql/data
+    networks:
+      - bridge
+  
+  pg-admin:
+    image: dpage/pgadmin4:latest
+    container_name: pg-admin
+    restart: always
+    depends_on: 
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${DB_ADMIN_USERNAME}
+      PGADMIN_DEFAULT_PASSWORD: ${DB_ADMIN_PASSWORD}
+    ports:
+      - ${DB_ADMIN_PORT}:80
+    volumes:
+      - pg-admin:/var/lib/pgadmin
+    networks:
+      - bridge
+
+volumes:
+  user-service-db:
+  pg-admin:
+  user-service-dev:
+
+networks:
+  bridge:

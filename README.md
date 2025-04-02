@@ -104,7 +104,7 @@
 
 ## Exception Handling
 
-
+## Configration variable validations
 
 
 <p align="center">
