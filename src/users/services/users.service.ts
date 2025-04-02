@@ -12,8 +12,9 @@ export class UsersService {
     private readonly usersRepository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto): string {
-    return 'created';
+  create(createUserDto: CreateUserDto): Promise<User> {
+    const user = this.usersRepository.create(createUserDto);
+    return this.usersRepository.save(user);
   }
 
   findAll(): Promise<User[]> {
@@ -25,10 +26,11 @@ export class UsersService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    return 'update'
+    // return this.usersRepository.update(id, { UpdateUserDto });
   }
 
   async remove(id: number) {
-    await this.usersRepository.delete(id);
+    return await this.usersRepository.delete(id);
   }
 }
