@@ -21,12 +21,10 @@
     "test:debug": "NODE_ENV=testing node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "NODE_ENV=testing jest --config ./test/jest-e2e.json",
     "typeorm": "env-cmd ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "migration:generate": "npm run typeorm -- --dataSource=src/database/typeorm.factory.ts migration:generate",
-    "postmigration:generate": "npm run lint -- --fix",
-    "migration:create": "npm run typeorm -- migration:create",
-    "migration:run": "npm run typeorm -- --dataSource=src/database/typeorm.factory.ts migration:run",
-    "migration:revert": "npm run typeorm -- --dataSource=src/database/typeorm.factory.ts migration:revert"
-
+    "migration:generate": "npx ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js migration:generate src/migrations/CreateTable -d data-source.ts",
+    "migration:run": "npx ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js migration:run -d data-source.ts",
+    "migration:revert": "npx ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js migration:revert -d data-source.ts",
+    "migration:status": "npx ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js migration:status -d data-source.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

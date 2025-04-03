@@ -40,6 +40,7 @@ export class User {
   @Column({ type: String, nullable: true })
   role?: string | null;
 
+  @Column({ type: String, nullable: true })
   status?: string;
 
   @CreateDateColumn()

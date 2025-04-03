@@ -1,6 +1,5 @@
 import { registerAs } from "@nestjs/config";
-import { User } from "src/users/entities/user.entity";
-console.log(process.env.NODE_ENV)
+
 export default registerAs('database', () => ({
   type: process.env.DB_TYPE || 'postgres',
   host: process.env.DB_HOST || 'localhost',
