@@ -106,6 +106,10 @@
 
 ## Configration variable validations
 
+## Health Checks
+- Each service should have proper health check implementation
+- like- server health check, db health check, ECS, health check, Monitoring hook health checks, etc.
+
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
