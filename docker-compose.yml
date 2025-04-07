@@ -45,10 +45,23 @@ services:
     networks:
       - bridge
 
+  redis:
+    image: redis:latest
+    container_name: redis_server
+    restart: always
+    ports: 
+      - "6379:6379"
+    volumes:
+      - redis-service:/var/lib/redis-data
+    command: ["redis-server", "--appendonly", "yes"]
+    networks:
+      - bridge
+
 volumes:
   user-service-db:
   pg-admin:
   user-service:
+  redis-service:
 
 networks:
   bridge:
