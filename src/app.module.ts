@@ -9,6 +9,7 @@ import { swaggerConfig } from './config/swagger.config';
 import { LoggerModule } from './logger/logger.module';
 import loggerConfig from './config/logger.config';
 import { ApiKeyMiddleware } from './middleware/api-key.middleware'
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { ApiKeyMiddleware } from './middleware/api-key.middleware'
     }),
     UsersModule,
     DatabaseModule,
-    LoggerModule
+    LoggerModule,
+    HealthModule
   ],
   controllers: [AppController],
   providers: [AppService],
