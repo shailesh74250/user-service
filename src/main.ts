@@ -3,10 +3,15 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
+import { LoggerService } from './logger/logger.service';
+import { LoggingInterceptor } from './logger/logging.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
+  const logger = app.get(LoggerService);
+  const loggerService = new LoggerService(configService);
+  app.useGlobalInterceptors(new LoggingInterceptor(loggerService));
   app.enableCors();
   app.use(helmet());
   // ✅ Ensure ConfigService is returning Swagger config correctly
@@ -30,8 +35,17 @@ async function bootstrap() {
      * Swagger document setup.
      */
     const document = SwaggerModule.createDocument(app, swagger);
-    SwaggerModule.setup(swaggerConfig.documentRoute || 'api/docs', app, document);
+    SwaggerModule.setup(
+      swaggerConfig.documentRoute || 'api/docs',
+      app,
+      document,
+    );
   }
+
+  logger.info(
+    `Application started at ${process.env.PORT ?? 3000}`,
+    'Azilen NestJS',
+  );
 
   await app.listen(process.env.PORT ?? 3000);
 }
