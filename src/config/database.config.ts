@@ -1,6 +1,21 @@
 import { registerAs } from "@nestjs/config";
 
-export default registerAs('database', () => ({
+interface dbConfigType {
+  type: string;
+  host: string;
+  port: number;
+  username: string;
+  password: string;
+  database: string;
+  autoLoadEntities: boolean;
+  migrations: string[];
+  entities: string[];
+  synchronize: boolean;
+  logging: boolean;
+  ssl: boolean;
+};
+
+export default registerAs('database', (): dbConfigType => ({
   type: process.env.DB_TYPE || 'postgres',
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '5432', 10),

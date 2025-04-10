@@ -10,6 +10,8 @@ import { LoggerModule } from './logger/logger.module';
 import loggerConfig from './config/logger.config';
 import { ApiKeyMiddleware } from './middleware/api-key.middleware'
 import { HealthModule } from './health/health.module';
+import { ChacheModule } from './chache/chache.module';
+import { CacheModule } from './cache/cache.module';
 
 @Module({
   imports: [
@@ -22,7 +24,9 @@ import { HealthModule } from './health/health.module';
     UsersModule,
     DatabaseModule,
     LoggerModule,
-    HealthModule
+    HealthModule,
+    ChacheModule,
+    CacheModule
   ],
   controllers: [AppController],
   providers: [AppService],
