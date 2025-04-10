@@ -1,9 +1,17 @@
-import { Module } from '@nestjs/common';
-import { CacheController } from './controllers/cache.controller';
-import { CacheService } from './services/cache.service';
+import { Module, Global } from '@nestjs/common';
+import { cacheFactory } from './cache.factory';
+import { CacheModule } from '@nestjs/cache-manager';
+import { ConfigService } from '@nestjs/config';
 
+@Global()
 @Module({
-  controllers: [CacheController],
-  providers: [CacheService]
+  providers: [
+    {
+      provide: 'KEYV_REDIS',
+      useFactory: cacheFactory,
+      inject: [ConfigService],
+    },
+  ],
+  exports: ['KEYV_REDIS'],
 })
-export class CacheModule {}
+export class RedisModule {}
