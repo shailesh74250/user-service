@@ -3,8 +3,8 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
-import { LoggerService } from './logger/logger.service';
-import { LoggingInterceptor } from './logger/logging.interceptor';
+import { LoggerService } from './shared/logger/logger.service';
+import { LoggingInterceptor } from './shared/logger/logging.interceptor';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 

@@ -1,19 +1,21 @@
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: users-service
-    restart: always
-    ports:
-      - "3000:3000"
-    environment:
-      NODE_ENV: production
-    depends_on:
-      - db
-    volumes:
-      - user-service:/var/lib/user-service
-  
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   container_name: users-service-dev
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     NODE_ENV: development
+  #   depends_on:
+  #     - db
+  #   volumes:
+  #     - user-service-dev:/var/lib/user-service-dev
+  #   networks:
+  #     - bridge
+
   db:
     image: postgres:17.4-alpine
     container_name: user-service-pg-db
@@ -45,23 +47,10 @@ services:
     networks:
       - bridge
 
-  redis:
-    image: redis:latest
-    container_name: redis_server
-    restart: always
-    ports: 
-      - "6379:6379"
-    volumes:
-      - redis-service:/var/lib/redis-data
-    command: ["redis-server", "--appendonly", "yes"]
-    networks:
-      - bridge
-
 volumes:
   user-service-db:
   pg-admin:
-  user-service:
-  redis-service:
+  # user-service-dev:
 
 networks:
   bridge:

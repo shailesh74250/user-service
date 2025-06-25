@@ -1,17 +1,18 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
+import { UserModule } from './modules/user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DatabaseModule } from './database/database.module';
 import databaseConfig from './config/database.config';
 import redisConfig from './config/cache.config';
 import { swaggerConfig } from './config/swagger.config';
-import { LoggerModule } from './logger/logger.module';
+import { LoggerModule } from './shared/logger/logger.module';
 import loggerConfig from './config/logger.config';
-import { ApiKeyMiddleware } from './middleware/api-key.middleware'
-import { HealthModule } from './health/health.module';
+import { ApiKeyMiddleware } from './utils/middleware/api-key.middleware'
+import { HealthModule } from './modules/health/health.module';
 import { RedisModule } from './cache/cache.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { DatabaseModule } from 'src/infrastructure/database/database.module';
 
 @Module({
   imports: [
@@ -21,11 +22,12 @@ import { RedisModule } from './cache/cache.module';
       load: [databaseConfig, swaggerConfig, loggerConfig, redisConfig],
       cache: true,
     }),
-    UsersModule,
     DatabaseModule,
+    UserModule,
     LoggerModule,
     HealthModule,
     RedisModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
