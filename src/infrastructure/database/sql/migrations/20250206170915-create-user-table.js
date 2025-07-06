@@ -19,10 +19,6 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -32,12 +28,36 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      createdAt: {
+      phone: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      email_verified: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      phone_verified: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      account_status: {
+        type: Sequelize.ENUM('active', 'inactive', 'suspended', 'pending'),
+        allowNull: false,
+        defaultValue: 'pending',
+      },
+      registration_for: {
+        type: Sequelize.ENUM('personal', 'business', 'organization', 'other'),
+        allowNull: false,
+        defaultValue: 'personal',
+      },
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW'),
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW'),

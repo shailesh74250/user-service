@@ -19,10 +19,13 @@ export class UserMapper {
     createUserDto: CreateUserDto,
   ): Partial<UserDbEntity> {
     return {
-      firstName: createUserDto.firstName,
-      lastName: createUserDto.lastName,
       email: createUserDto.email,
       password: createUserDto.password,
+      phone: createUserDto.phone,
+      email_verified: createUserDto.email_verified || false,
+      phone_verified: createUserDto.phone_verified || false,
+      account_status: createUserDto.account_status,
+      registration_for: createUserDto.registration_for,
     };
   }
 
@@ -36,10 +39,13 @@ export class UserMapper {
     updateUserDto: UpdateUserDto,
   ): Partial<UserDbEntity> {
     return {
-      firstName: updateUserDto.firstName,
-      lastName: updateUserDto.lastName,
       email: updateUserDto.email,
       password: updateUserDto.password,
+      phone: updateUserDto.phone,
+      email_verified: updateUserDto.email_verified,
+      phone_verified: updateUserDto.phone_verified,
+      account_status: updateUserDto.account_status,
+      registration_for: updateUserDto.registration_for,
     };
   }
 
@@ -50,7 +56,30 @@ export class UserMapper {
    * @returns The User domain entity
    */
   static toDomain(userDbEntity: UserDbEntity): User {
-    const { id, firstName, lastName, email, password, createdAt, updatedAt } = userDbEntity;
-    return new User(id, firstName, lastName, email, password, createdAt, updatedAt);
+    const { 
+      id, 
+      email, 
+      password, 
+      phone,
+      email_verified,
+      phone_verified,
+      account_status,
+      registration_for,
+      created_at, 
+      updated_at 
+    } = userDbEntity;
+    
+    return new User(
+      id, 
+      email, 
+      password, 
+      phone,
+      email_verified,
+      phone_verified,
+      account_status,
+      registration_for,
+      created_at, 
+      updated_at
+    );
   }
 }

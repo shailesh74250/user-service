@@ -5,6 +5,7 @@ import {
   DataType,
   BeforeUpdate,
 } from 'sequelize-typescript';
+import { AccountStatus, RegistrationFor } from '../../../domain/entities/user.entity';
 
 /**
  * User database entity representing a user in the database.
@@ -29,30 +30,6 @@ export class UserDbEntity extends Model<UserDbEntity> {
     primaryKey: true,
   })
   declare id: string;
-
-  /**
-   * The first name of the user.
-   *
-   * @column
-   * @type {string}
-   */
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  firstName: string;
-
-  /**
-   * The last name of the user.
-   *
-   * @column
-   * @type {string}
-   */
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  lastName: string;
 
   /**
    * The email of the user.
@@ -80,6 +57,70 @@ export class UserDbEntity extends Model<UserDbEntity> {
   password: string;
 
   /**
+   * The phone number of the user.
+   *
+   * @column
+   * @type {string}
+   */
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  phone: string;
+
+  /**
+   * Whether the email is verified.
+   *
+   * @column
+   * @type {boolean}
+   */
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  })
+  email_verified: boolean;
+
+  /**
+   * Whether the phone is verified.
+   *
+   * @column
+   * @type {boolean}
+   */
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  })
+  phone_verified: boolean;
+
+  /**
+   * The account status of the user.
+   *
+   * @column
+   * @type {AccountStatus}
+   */
+  @Column({
+    type: DataType.ENUM(...Object.values(AccountStatus)),
+    allowNull: false,
+    defaultValue: AccountStatus.PENDING,
+  })
+  account_status: AccountStatus;
+
+  /**
+   * The registration purpose of the user.
+   *
+   * @column
+   * @type {RegistrationFor}
+   */
+  @Column({
+    type: DataType.ENUM(...Object.values(RegistrationFor)),
+    allowNull: false,
+    defaultValue: RegistrationFor.PERSONAL,
+  })
+  registration_for: RegistrationFor;
+
+  /**
    * The date and time when the user was created.
    *
    * @column
@@ -89,7 +130,7 @@ export class UserDbEntity extends Model<UserDbEntity> {
     type: DataType.DATE,
     defaultValue: DataType.NOW,
   })
-  declare createdAt: Date;
+  declare created_at: Date;
 
   /**
    * The date and time when the user was last updated.
@@ -101,14 +142,14 @@ export class UserDbEntity extends Model<UserDbEntity> {
     type: DataType.DATE,
     defaultValue: DataType.NOW,
   })
-  declare updatedAt: Date;
+  declare updated_at: Date;
 
   /**
-   * Hook to update the updatedAt field before updating the record.
+   * Hook to update the updated_at field before updating the record.
    */
   @BeforeUpdate
   static updateTimestamp(instance: UserDbEntity) {
-    instance.updatedAt = new Date();
+    instance.updated_at = new Date();
   }
 }
 
