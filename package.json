@@ -11,7 +11,7 @@
     "generate:resource:relational": "hygen generator relational-resource",
     "start": "nest start",
     "start:dev": "nest start --watch",
-    "start:swc": "NODE_ENV=development nest start -b swc -w",
+    "start:swc": "nest start -b swc -w",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",

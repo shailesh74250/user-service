@@ -5,7 +5,8 @@ import {
   DataType,
   BeforeUpdate,
 } from 'sequelize-typescript';
-import { AccountStatus, RegistrationFor } from '../../../domain/entities/user.entity';
+// Update the import path below if the file exists elsewhere, or create the file if missing.
+import { AccountStatus, RegistrationFor } from '../../../../domain/entities/user.entity';
 
 /**
  * User database entity representing a user in the database.
@@ -16,6 +17,8 @@ import { AccountStatus, RegistrationFor } from '../../../domain/entities/user.en
 @Table({
   tableName: 'users',
   timestamps: true,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
 })
 export class UserDbEntity extends Model<UserDbEntity> {
   /**

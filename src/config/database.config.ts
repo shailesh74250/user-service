@@ -1,32 +1,21 @@
-import { registerAs } from "@nestjs/config";
+/**
+ * Database Configuration
+ *
+ * This file defines the database configuration using environment variables.
+ * @constant databaseConfig
+ */
 
-interface dbConfigType {
-  type: string;
-  host: string;
-  port: number;
-  username: string;
-  password: string;
-  database: string;
-  autoLoadEntities: boolean;
-  migrations: string[];
-  entities: string[];
-  synchronize: boolean;
-  logging: boolean;
-  ssl: boolean;
-};
+import { registerAs } from '@nestjs/config';
 
-export default registerAs('database', (): dbConfigType => ({
-  type: process.env.DB_TYPE || 'postgres',
+export default registerAs('database', () => ({
+  dialect: process.env.DB_DIALECT || 'postgres',
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '5432', 10),
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'postgres',
-  database: process.env.DB_DATABASE || 'user_db',
-  autoLoadEntities: true,
-  migrations: [__dirname + (process.env.NODE_ENV === 'production' ? '/../migrations/*.js' : '/../migrations/*.ts')], // Add migration support
-  entities: [__dirname + (process.env.NODE_ENV === 'production' ? '/../**/*.entity.js' : '/../**/*.entity.ts')],
+  database: process.env.DB_DATABASE || 'user_service_db',
+  autoLoadModels: true,
   synchronize: process.env.NODE_ENV === 'development',
   logging: process.env.NODE_ENV === 'development',
   ssl: false,
 }));
-  

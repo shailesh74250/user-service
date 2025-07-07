@@ -18,7 +18,7 @@ import { DatabaseModule } from 'src/infrastructure/database/database.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
+      envFilePath: `.env${process.env.NODE_ENV ? `.${process.env.NODE_ENV}` : ''}`,
       load: [databaseConfig, swaggerConfig, loggerConfig, redisConfig],
       cache: true,
     }),

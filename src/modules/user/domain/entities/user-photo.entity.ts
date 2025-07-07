@@ -37,7 +37,7 @@ export class UserPhoto {
   photo_url: string;
 
   /**
-   * The type of the photo.
+   * The type of photo.
    *
    * @type {PhotoType}
    */
@@ -77,7 +77,7 @@ export class UserPhoto {
    * @param id - The unique identifier of the user photo
    * @param user_id - The user ID this photo belongs to
    * @param photo_url - The URL of the photo
-   * @param photo_type - The type of the photo
+   * @param photo_type - The type of photo
    * @param is_primary - Whether this is the primary photo
    * @param is_approved - Whether the photo is approved
    * @param display_order - The display order of the photo

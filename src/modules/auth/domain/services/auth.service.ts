@@ -19,13 +19,11 @@ export class AuthService {
     const exists = await this.userModel.findOne({ where: { email: dto.email } });
     if (exists) throw new BadRequestException('Email already registered');
     const hash = await bcrypt.hash(dto.password, 10);
-    const user = this.userModel.build({
-      email: dto.email,
-      firstName: dto.firstName,
-      lastName: dto.lastName,
-      password: hash,
-    });
-    await user.save();
+    // const user = this.userModel.build({
+    //   email: dto.email,
+    //   password: hash,
+    // });
+    // await user.save();
     return { message: 'Registration successful' };
   }
 
@@ -78,7 +76,5 @@ export class AuthService {
 
   async isTokenBlacklisted(token: string): Promise<boolean> {
     return this.tokenBlacklist.has(token);
-  }
-}
   }
 }

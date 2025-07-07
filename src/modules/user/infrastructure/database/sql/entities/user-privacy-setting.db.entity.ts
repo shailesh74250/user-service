@@ -7,12 +7,12 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
+import { UserDbEntity } from './user.db.entity';
 import {
   ContactInfoVisibility,
   PhotoVisibility,
   MessageReceivePreference,
-} from '../../../domain/entities/user-privacy-setting.entity';
-import { UserDbEntity } from './user.db.entity';
+} from '../../../../domain/entities/user-privacy-setting.entity';
 
 /**
  * UserPrivacySetting database entity representing a user's privacy settings in the database.
@@ -26,7 +26,7 @@ import { UserDbEntity } from './user.db.entity';
 })
 export class UserPrivacySettingDbEntity extends Model<UserPrivacySettingDbEntity> {
   /**
-   * The unique identifier of the user privacy setting.
+   * The unique identifier of the user privacy setting record.
    *
    * @column
    * @type {string}
@@ -61,7 +61,7 @@ export class UserPrivacySettingDbEntity extends Model<UserPrivacySettingDbEntity
   @Column({
     type: DataType.ENUM(...Object.values(ContactInfoVisibility)),
     allowNull: false,
-    defaultValue: ContactInfoVisibility.CONNECTIONS_ONLY,
+    defaultValue: ContactInfoVisibility.PREMIUM_MEMBERS,
   })
   show_contact_info: ContactInfoVisibility;
 
@@ -74,7 +74,7 @@ export class UserPrivacySettingDbEntity extends Model<UserPrivacySettingDbEntity
   @Column({
     type: DataType.ENUM(...Object.values(PhotoVisibility)),
     allowNull: false,
-    defaultValue: PhotoVisibility.PUBLIC,
+    defaultValue: PhotoVisibility.PREMIUM_MEMBERS,
   })
   show_photos: PhotoVisibility;
 
@@ -87,7 +87,7 @@ export class UserPrivacySettingDbEntity extends Model<UserPrivacySettingDbEntity
   @Column({
     type: DataType.ENUM(...Object.values(MessageReceivePreference)),
     allowNull: false,
-    defaultValue: MessageReceivePreference.EVERYONE,
+    defaultValue: MessageReceivePreference.PREMIUM_MEMBERS,
   })
   receive_messages: MessageReceivePreference;
 

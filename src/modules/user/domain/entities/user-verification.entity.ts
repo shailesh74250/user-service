@@ -92,6 +92,13 @@ export class UserVerification {
   created_at: Date;
 
   /**
+   * The date and time when the verification record was last updated.
+   *
+   * @type {Date}
+   */
+  updated_at: Date;
+
+  /**
    * Constructs a new instance of the UserVerification entity.
    *
    * @param id - The unique identifier of the user verification record
@@ -103,6 +110,7 @@ export class UserVerification {
    * @param verified_at - The date and time when the verification was approved/rejected
    * @param rejection_reason - The reason for rejection if the verification was rejected
    * @param created_at - The date and time when the verification record was created
+   * @param updated_at - The date and time when the verification record was last updated
    */
   constructor(
     id: string,
@@ -114,6 +122,7 @@ export class UserVerification {
     verified_at: Date,
     rejection_reason: string,
     created_at: Date,
+    updated_at: Date,
   ) {
     this.id = id;
     this.user_id = user_id;
@@ -124,5 +133,6 @@ export class UserVerification {
     this.verified_at = verified_at;
     this.rejection_reason = rejection_reason;
     this.created_at = created_at;
+    this.updated_at = updated_at;
   }
 }

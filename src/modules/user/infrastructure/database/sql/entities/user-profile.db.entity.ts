@@ -7,14 +7,14 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
+import { UserDbEntity } from './user.db.entity';
 import {
   MaritalStatus,
   Gender,
   Complexion,
   BodyType,
   ProfileVisibility,
-} from '../../../domain/entities/user-profile.entity';
-import { UserDbEntity } from './user.db.entity';
+} from '../../../../domain/entities/user-profile.entity';
 
 /**
  * UserProfile database entity representing a user profile in the database.
@@ -280,7 +280,7 @@ export class UserProfileDbEntity extends Model<UserProfileDbEntity> {
   user: UserDbEntity;
 
   /**
-   * Belongs to User relationship for creator
+   * Belongs to Creator relationship
    */
   @BelongsTo(() => UserDbEntity, 'created_by')
   creator: UserDbEntity;
