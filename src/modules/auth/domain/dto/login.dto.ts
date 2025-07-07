@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, MinLength, IsPhoneNumber, IsOptional, IsEnum } from 'class-validator';
+import { AccountStatus, RegistrationFor } from '../../../user/domain/entities/user.entity';
 
 export class LoginDto {
   @ApiProperty()
@@ -21,12 +22,18 @@ export class RegisterDto {
   password: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  firstName: string;
+  @IsPhoneNumber()
+  phone: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  lastName: string;
+  @ApiProperty({ enum: RegistrationFor, default: RegistrationFor.PERSONAL })
+  @IsEnum(RegistrationFor)
+  @IsOptional()
+  registration_for?: RegistrationFor;
+
+  @ApiProperty({ enum: AccountStatus, default: AccountStatus.PENDING })
+  @IsEnum(AccountStatus)
+  @IsOptional()
+  account_status?: AccountStatus;
 }
 
 export class ChangePasswordDto {

@@ -42,10 +42,10 @@ export class UserDbEntity extends Model<UserDbEntity> {
    */
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
     unique: true,
   })
-  email: string;
+  declare email: string;
 
   /**
    * The password of the user.
@@ -57,7 +57,7 @@ export class UserDbEntity extends Model<UserDbEntity> {
     type: DataType.STRING,
     allowNull: false,
   })
-  password: string;
+  declare password: string;
 
   /**
    * The phone number of the user.
@@ -67,9 +67,10 @@ export class UserDbEntity extends Model<UserDbEntity> {
    */
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
+    unique: true,
   })
-  phone: string;
+  declare phone: string;
 
   /**
    * Whether the email is verified.
@@ -82,7 +83,7 @@ export class UserDbEntity extends Model<UserDbEntity> {
     allowNull: false,
     defaultValue: false,
   })
-  email_verified: boolean;
+  declare email_verified: boolean;
 
   /**
    * Whether the phone is verified.
@@ -95,7 +96,7 @@ export class UserDbEntity extends Model<UserDbEntity> {
     allowNull: false,
     defaultValue: false,
   })
-  phone_verified: boolean;
+  declare phone_verified: boolean;
 
   /**
    * The account status of the user.
@@ -108,7 +109,7 @@ export class UserDbEntity extends Model<UserDbEntity> {
     allowNull: false,
     defaultValue: AccountStatus.PENDING,
   })
-  account_status: AccountStatus;
+  declare account_status: AccountStatus;
 
   /**
    * The registration purpose of the user.
@@ -121,7 +122,7 @@ export class UserDbEntity extends Model<UserDbEntity> {
     allowNull: false,
     defaultValue: RegistrationFor.PERSONAL,
   })
-  registration_for: RegistrationFor;
+  declare registration_for: RegistrationFor;
 
   /**
    * The date and time when the user was created.

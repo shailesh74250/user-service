@@ -1,4 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './modules/user/user.module';
@@ -13,6 +14,7 @@ import { HealthModule } from './modules/health/health.module';
 import { RedisModule } from './cache/cache.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { DatabaseModule } from 'src/infrastructure/database/database.module';
+import { ResponseFormatInterceptor } from './utils/interceptors/response-format.interceptor';
 
 @Module({
   imports: [
@@ -30,7 +32,13 @@ import { DatabaseModule } from 'src/infrastructure/database/database.module';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseFormatInterceptor,
+    },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

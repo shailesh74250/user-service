@@ -9,6 +9,7 @@ import {
   IsUrl,
   MaxLength,
 } from 'class-validator';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import {
   MaritalStatus,
   Gender,
@@ -28,6 +29,10 @@ export class UpdateUserProfileDto {
    *
    * @example 'John'
    */
+  @ApiPropertyOptional({
+    description: 'The first name of the user',
+    example: 'John',
+  })
   @IsString()
   @IsOptional()
   first_name?: string;
@@ -37,6 +42,10 @@ export class UpdateUserProfileDto {
    *
    * @example 'Doe'
    */
+  @ApiPropertyOptional({
+    description: 'The last name of the user',
+    example: 'Doe',
+  })
   @IsString()
   @IsOptional()
   last_name?: string;
@@ -46,6 +55,10 @@ export class UpdateUserProfileDto {
    *
    * @example 'Johnny'
    */
+  @ApiPropertyOptional({
+    description: 'The display name of the user',
+    example: 'Johnny',
+  })
   @IsString()
   @IsOptional()
   display_name?: string;
@@ -55,6 +68,11 @@ export class UpdateUserProfileDto {
    *
    * @example '1990-01-01'
    */
+  @ApiPropertyOptional({
+    description: 'The date of birth of the user',
+    example: '1990-01-01',
+    format: 'date',
+  })
   @IsDateString()
   @IsOptional()
   dob?: string;
@@ -64,6 +82,11 @@ export class UpdateUserProfileDto {
    *
    * @example 'male'
    */
+  @ApiPropertyOptional({
+    description: 'The gender of the user',
+    enum: Gender,
+    example: Gender.MALE,
+  })
   @IsEnum(Gender)
   @IsOptional()
   gender?: Gender;
@@ -73,6 +96,11 @@ export class UpdateUserProfileDto {
    *
    * @example 'single'
    */
+  @ApiPropertyOptional({
+    description: 'The marital status of the user',
+    enum: MaritalStatus,
+    example: MaritalStatus.SINGLE,
+  })
   @IsEnum(MaritalStatus)
   @IsOptional()
   marital_status?: MaritalStatus;
@@ -82,6 +110,12 @@ export class UpdateUserProfileDto {
    *
    * @example 175.5
    */
+  @ApiPropertyOptional({
+    description: 'The height of the user in centimeters',
+    example: 175.5,
+    minimum: 50,
+    maximum: 300,
+  })
   @IsNumber({ maxDecimalPlaces: 2 })
   @Min(50)
   @Max(300)
@@ -93,6 +127,12 @@ export class UpdateUserProfileDto {
    *
    * @example 70.5
    */
+  @ApiPropertyOptional({
+    description: 'The weight of the user in kilograms',
+    example: 70.5,
+    minimum: 10,
+    maximum: 500,
+  })
   @IsNumber({ maxDecimalPlaces: 2 })
   @Min(10)
   @Max(500)
@@ -104,6 +144,11 @@ export class UpdateUserProfileDto {
    *
    * @example 'fair'
    */
+  @ApiPropertyOptional({
+    description: 'The complexion of the user',
+    enum: Complexion,
+    example: Complexion.FAIR,
+  })
   @IsEnum(Complexion)
   @IsOptional()
   complexion?: Complexion;
@@ -113,6 +158,11 @@ export class UpdateUserProfileDto {
    *
    * @example 'athletic'
    */
+  @ApiPropertyOptional({
+    description: 'The body type of the user',
+    enum: BodyType,
+    example: BodyType.ATHLETIC,
+  })
   @IsEnum(BodyType)
   @IsOptional()
   body_type?: BodyType;
@@ -122,6 +172,11 @@ export class UpdateUserProfileDto {
    *
    * @example 'https://example.com/photo.jpg'
    */
+  @ApiPropertyOptional({
+    description: 'The profile photo URL of the user',
+    example: 'https://example.com/photo.jpg',
+    format: 'url',
+  })
   @IsUrl()
   @IsOptional()
   profile_photo_url?: string;
@@ -131,6 +186,11 @@ export class UpdateUserProfileDto {
    *
    * @example 'I love hiking and photography'
    */
+  @ApiPropertyOptional({
+    description: 'About me description of the user',
+    example: 'I love hiking and photography',
+    maxLength: 1000,
+  })
   @IsString()
   @MaxLength(1000)
   @IsOptional()
@@ -141,6 +201,11 @@ export class UpdateUserProfileDto {
    *
    * @example 'public'
    */
+  @ApiPropertyOptional({
+    description: 'The profile visibility setting',
+    enum: ProfileVisibility,
+    example: ProfileVisibility.PUBLIC,
+  })
   @IsEnum(ProfileVisibility)
   @IsOptional()
   profile_visibility?: ProfileVisibility;
@@ -150,6 +215,12 @@ export class UpdateUserProfileDto {
    *
    * @example 85.5
    */
+  @ApiPropertyOptional({
+    description: 'The profile completion percentage',
+    example: 85.5,
+    minimum: 0,
+    maximum: 100,
+  })
   @IsNumber({ maxDecimalPlaces: 2 })
   @Min(0)
   @Max(100)

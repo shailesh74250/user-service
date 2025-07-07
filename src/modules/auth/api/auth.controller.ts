@@ -1,9 +1,16 @@
 import { Controller, Post, Body, UseGuards, Req, Headers } from '@nestjs/common';
 import { AuthService } from '../domain/services/auth.service';
 import { RegisterDto, LoginDto, ChangePasswordDto, ForgotPasswordDto, ResetPasswordDto } from '../domain/dto/login.dto';
-// Update the path below to the correct location of jwt-auth.guard.ts
 import { JwtAuthGuard } from '../../../utils/guards/jwt-auth.guard';
 import { Request } from '@nestjs/common';
+
+interface RefreshTokenDto {
+  refresh_token: string;
+}
+
+interface LogoutDto {
+  refresh_token?: string;
+}
 
 @Controller('auth')
 export class AuthController {
@@ -36,10 +43,15 @@ export class AuthController {
     return this.authService.resetPassword(dto);
   }
 
+  @Post('refresh')
+  refreshToken(@Body() dto: RefreshTokenDto) {
+    return this.authService.refreshToken(dto.refresh_token);
+  }
+
   @Post('logout')
   @UseGuards(JwtAuthGuard)
-  logout(@Headers('authorization') authHeader: string) {
+  logout(@Headers('authorization') authHeader: string, @Body() dto: LogoutDto) {
     const token = authHeader?.replace('Bearer ', '');
-    return this.authService.logout(token);
+    return this.authService.logout(token, dto.refresh_token);
   }
 }
